@@ -1,0 +1,17 @@
+{
+  "name": "generator-gio",
+  "version": "1.0.0",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "yeoman-generator": "^4.13.0"
+  },
+  "devDependencies": {
+    "@types/yeoman-generator": "^4.11.3"
+  }
+}
