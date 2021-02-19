@@ -5,13 +5,25 @@
     "generators"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "growingio",
+    "gio",
+    "generator"
   ],
   "license": "MIT",
+  "scripts": {
+    "preversion": "git fetch --tags",
+    "postversion": "yarn gen-version && yarn gen-changelog",
+    "gen-version": "conventional-changelog -p angular > VERSION.md",
+    "gen-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "get-version": "gio-design version -p ./package.json"
+  },
   "dependencies": {
     "yeoman-generator": "^4.13.0"
   },
   "devDependencies": {
-    "@types/yeoman-generator": "^4.11.3"
+    "@gio-design/cli": "^21.2.0",
+    "@types/yeoman-generator": "^4.11.3",
+    "conventional-changelog-cli": "^2.1.1"
   }
 }
