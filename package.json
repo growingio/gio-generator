@@ -10,7 +10,9 @@
     "gio",
     "generator"
   ],
-  "license": "MIT",
+  "repository": "https://github.com/growingio/gio-generator.git",
+  "author": "GrowingIO Frontend Team <eng-frontend@growingio.com>",
+  "license": "Apache-2.0",
   "scripts": {
     "preversion": "git fetch --tags",
     "postversion": "yarn gen-version && yarn gen-changelog",
