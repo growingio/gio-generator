@@ -13,7 +13,7 @@ $ npm install -g yo generator-gio
 or using Yarn:
 
 ```bash
-$ yarn golbal add yo generator-gio
+$ yarn global add yo generator-gio
 ```
 
 ## Run the Generator
