@@ -1,5 +1,15 @@
 const Generator = require('yeoman-generator');
 
+const camelize = (componentName) =>
+  componentName
+    .replace(/^\S/, (s) => s.toUpperCase())
+    .replace(/-\S/, (s) => s.toUpperCase()[1]);
+
+const dasherize = (componentName) => 
+  componentName
+    .replace(/^\S/, (s) => s.toLowerCase())
+    .replace(/([A-Z])/, (s) => `-${s.toLowerCase()}`);
+
 module.exports = class extends Generator {
   constructor(args, opts){
     super(args, opts);
@@ -28,31 +38,31 @@ module.exports = class extends Generator {
     const { path, componentNameFromPrompt } = this.answers;
     
     const componentName = (componentNameFromArgument || componentNameFromPrompt)
-    const componentNameFirstUpperCase = componentName.replace(/^\S/, s => s.toUpperCase());
-    const componentPath = `${path}/${componentName.toLowerCase()}`
+    const camelizedComponentName = camelize(componentName);
+    const componentPath = `${path}/${dasherize(componentName)}`
     
     this.fs.copyTpl(
       this.templatePath('__tests__/index.test.tsx'),
-      this.destinationPath(`${componentPath}/__tests__/${componentNameFirstUpperCase}.test.tsx`),
-      { componentName: componentNameFirstUpperCase }
+      this.destinationPath(`${componentPath}/__tests__/${camelizedComponentName}.test.tsx`),
+      { componentName: camelizedComponentName }
     );
 
     this.fs.copyTpl(
       this.templatePath('component.tsx'),
-      this.destinationPath(`${componentPath}/${componentNameFirstUpperCase}.tsx`),
-      { componentName: componentNameFirstUpperCase }
+      this.destinationPath(`${componentPath}/${camelizedComponentName}.tsx`),
+      { componentName: camelizedComponentName }
     );
 
     this.fs.copyTpl(
       this.templatePath('index.ts'),
       this.destinationPath(`${componentPath}/index.ts`),
-      { componentName: componentNameFirstUpperCase }
+      { componentName: camelizedComponentName }
     );
 
     this.fs.copyTpl(
       this.templatePath('interfaces.ts'),
       this.destinationPath(`${componentPath}/interfaces.ts`),
-      { componentName: componentNameFirstUpperCase }
+      { componentName: camelizedComponentName }
     );
 
     this.fs.copyTpl(
@@ -67,15 +77,15 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('index.stories.tsx'),
-      this.destinationPath(`${componentPath}/${componentNameFirstUpperCase}.stories.tsx`),
-      { componentName: componentNameFirstUpperCase }
-    )
-    this.fs.copyTpl(
-      this.templatePath('index.mdx'),
-      this.destinationPath(`${componentPath}/${componentNameFirstUpperCase}.mdx`),
-      { componentName: componentNameFirstUpperCase }
+      this.destinationPath(`${componentPath}/${camelizedComponentName}.stories.tsx`),
+      { componentName: camelizedComponentName }
     )
 
+    this.fs.copyTpl(
+      this.templatePath('index.mdx'),
+      this.destinationPath(`${componentPath}/${camelizedComponentName}.mdx`),
+      { componentName: camelizedComponentName }
+    )
   }
 
   end() {
