@@ -6,5 +6,4 @@ const <%=componentName %> = ({}: <%= componentName %>Props) => {
   return ();
 }
 
-
 export default <%=componentName %>;
