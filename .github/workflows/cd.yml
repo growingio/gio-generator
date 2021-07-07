@@ -26,7 +26,6 @@ jobs:
   publish:
     name: Publish package
     needs: install
-    if: ${{ startsWith(github.event.head_commit.message, 'docs(release)') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,20 +40,8 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ hashFiles('yarn.lock') }}
-      - name: Publish package
-        run: yarn publish --non-interactive --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Get package version
-        id: get-package-version
-        run: echo "::set-output name=version::$(yarn -s get-version)"
-      - name: Publish GitHub release
-        uses: actions/create-release@v1
+      - name: Release
+        run: yarn semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ steps.get-package-version.outputs.version }}
-          release_name: v${{ steps.get-package-version.outputs.version }}
-          body_path: VERSION.md
-          draft: false
-          prerelease: false
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
