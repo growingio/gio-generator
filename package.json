@@ -18,14 +18,17 @@
     "postversion": "yarn gen-version && yarn gen-changelog",
     "gen-version": "conventional-changelog -p angular > VERSION.md",
     "gen-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "get-version": "gio-design version -p ./package.json"
+    "get-version": "gio-design version -p ./package.json",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "yeoman-generator": "^4.13.0"
   },
   "devDependencies": {
     "@gio-design/cli": "^21.2.0",
+    "@semantic-release/github": "^7.2.3",
     "@types/yeoman-generator": "^4.11.3",
-    "conventional-changelog-cli": "^2.1.1"
+    "conventional-changelog-cli": "^2.1.1",
+    "semantic-release": "^17.4.4"
   }
 }
