@@ -1,6 +1,6 @@
 {
   "name": "generator-gio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "files": [
     "generators"
   ],
@@ -14,10 +14,6 @@
   "author": "GrowingIO Frontend Team <eng-frontend@growingio.com>",
   "license": "Apache-2.0",
   "scripts": {
-    "preversion": "git fetch --tags",
-    "postversion": "yarn gen-version && yarn gen-changelog",
-    "gen-version": "conventional-changelog -p angular > VERSION.md",
-    "gen-changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "get-version": "gio-design version -p ./package.json",
     "semantic-release": "semantic-release"
   },
