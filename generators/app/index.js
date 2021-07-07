@@ -2,13 +2,13 @@ const Generator = require('yeoman-generator');
 
 const camelize = (componentName) =>
   componentName
-    .replace(/^\S/, (s) => s.toUpperCase())
-    .replace(/-\S/, (s) => s.toUpperCase()[1]);
+    .replace(/^\S/g, (s) => s.toUpperCase())
+    .replace(/-\S/g, (s) => s.toUpperCase()[1]);
 
 const dasherize = (componentName) => 
   componentName
-    .replace(/^\S/, (s) => s.toLowerCase())
-    .replace(/([A-Z])/, (s) => `-${s.toLowerCase()}`);
+    .replace(/^\S/g, (s) => s.toLowerCase())
+    .replace(/([A-Z])/g, (s) => `-${s.toLowerCase()}`);
 
 module.exports = class extends Generator {
   constructor(args, opts){
@@ -36,11 +36,11 @@ module.exports = class extends Generator {
     this.log('writing....');
     const { componentName: componentNameFromArgument } = this.options;
     const { path, componentNameFromPrompt } = this.answers;
-    
-    const componentName = (componentNameFromArgument || componentNameFromPrompt)
+
+    const componentName = (componentNameFromArgument || componentNameFromPrompt);
     const camelizedComponentName = camelize(componentName);
-    const componentPath = `${path}/${dasherize(componentName)}`
-    
+    const componentPath = `${path}/${dasherize(componentName)}`;
+
     this.fs.copyTpl(
       this.templatePath('__tests__/index.test.tsx'),
       this.destinationPath(`${componentPath}/__tests__/${camelizedComponentName}.test.tsx`),
@@ -68,24 +68,24 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('style/index.ts'),
       this.destinationPath(`${componentPath}/style/index.ts`)
-    )
+    );
 
     this.fs.copyTpl(
       this.templatePath('style/index.less'),
       this.destinationPath(`${componentPath}/style/index.less`)
-    )
+    );
 
     this.fs.copyTpl(
       this.templatePath('index.stories.tsx'),
       this.destinationPath(`${componentPath}/${camelizedComponentName}.stories.tsx`),
       { componentName: camelizedComponentName }
-    )
+    );
 
     this.fs.copyTpl(
       this.templatePath('index.mdx'),
       this.destinationPath(`${componentPath}/${camelizedComponentName}.mdx`),
       { componentName: camelizedComponentName }
-    )
+    );
   }
 
   end() {

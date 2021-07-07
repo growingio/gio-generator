@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import Docs from './<%= componentName %>.mdx';
-import { <%= componentName %>, <%= componentName %>Props } from './index';
+import <%= componentName %>, { <%= componentName %>Props } from './index';
 
 export default {
   title: '<%= componentName %>',
@@ -17,3 +17,4 @@ const Template: Story<<%= componentName %>Props> = (args) => <<%= componentName 
 
 export const Default = Template.bind({});
 Default.args = {};
+
